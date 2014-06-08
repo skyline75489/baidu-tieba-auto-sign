@@ -5,7 +5,7 @@
 
 这是一个可以模拟客户端对百度贴吧进行批量签到的Python脚本。
 
-修改自[idevcod的专栏](http://blog.csdn.net/idevcod/article/details/11479897)，[Github仓库](https://github.com/ifreefly/baidu_bot)。对代码进行了完全重构，并改为可以模拟客户端进行签到。
+修改自[idevcod的专栏](http://blog.csdn.net/idevcod/article/details/11479897)，对应[Github仓库](https://github.com/ifreefly/baidu_bot)。对代码进行了完全重构，并改为可以模拟客户端进行签到。
 
 模拟客户端部分参考了Userscript上的[Tieba Client脚本](http://userscripts.org/scripts/review/177032)。
 
