@@ -91,7 +91,7 @@ def _handle_response(sign_resp):
         print '之前已签到'
     else:
         print '签到失败'
-        print "Error:" + str(sign_resp['error_code']) + " " + str(sign_resp['error_msg'])
+        print "Error:" + unicode(sign_resp['error_code']) + " " + unicode(sign_resp['error_msg'])
 
 
 def _sign_tieba(tieba, BDUSS):
