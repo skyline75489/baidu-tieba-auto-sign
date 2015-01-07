@@ -42,7 +42,7 @@ def _fetch_tieba_info(tieba):
     wap_resp = urllib2.urlopen(tieba_wap_url).read()
 
     if not wap_resp:
-	    return 
+        return
     re_already_sign = '<td style="text-align:right;"><span[ ]>(.*?)<\/span><\/td><\/tr>'
     already_sign = re.findall(re_already_sign, wap_resp)
 
@@ -101,11 +101,11 @@ def _sign_tieba(tieba, BDUSS):
     else:
         if already_sign[0] == "已签到":
             print tieba + "......之前已签到"
-	    return
+            return
 
     if not fid or not tbs:
-	    print "签到失败，原因未知"
-	    return
+        print "签到失败，原因未知"
+        return
 
     sign_request = _make_sign_request(tieba, fid, tbs, BDUSS)
     sign_resp = urllib2.urlopen(sign_request)
@@ -119,6 +119,10 @@ def sign(my_cookie, BDUSS):
         _sign_tieba(tieba, BDUSS)
 
 
-my_cookie = "填入你的Cookie"
-BDUSS = "填入你的BDUSS"
-sign(my_cookie, BDUSS)
+def main():
+    my_cookie = "填入你的Cookie"
+    BDUSS = "填入你的BDUSS"
+    sign(my_cookie, BDUSS)
+
+if __name__ == "__main__":
+    main()
