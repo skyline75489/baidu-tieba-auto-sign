@@ -117,6 +117,8 @@ def sign(my_cookie, BDUSS):
     _like_tieba_list = _fetch_like_tieba_list()
     for tieba in _like_tieba_list:
         _sign_tieba(tieba, BDUSS)
+    else:
+        print "获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
 
 
 def main():
