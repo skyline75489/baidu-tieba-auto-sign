@@ -115,10 +115,11 @@ def _sign_tieba(tieba, BDUSS):
 def sign(my_cookie, BDUSS):
     _setup_cookie(my_cookie)
     _like_tieba_list = _fetch_like_tieba_list()
+    if len(_like_tieba_list) == 0:
+        print "获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
+        return
     for tieba in _like_tieba_list:
         _sign_tieba(tieba, BDUSS)
-    else:
-        print "获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
 
 
 def main():
