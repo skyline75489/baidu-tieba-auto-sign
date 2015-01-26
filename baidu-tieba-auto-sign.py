@@ -85,13 +85,22 @@ def _make_sign_request(tieba, fid, tbs, BDUSS):
 
 def _handle_response(sign_resp):
     sign_resp = json.load(sign_resp)
-    if sign_resp['error_code'] == '0':
-        print "签到成功,经验+%d" % int(sign_resp['user_info']['sign_bonus_point'])
-    elif sign_resp['error_msg'] == u'亲，你之前已经签过了':
-        print '之前已签到'
+    error_code = sign_resp['error_code']
+    sign_bonus_point = 0
+    try:
+        # Don't know why but sometimes this will trigger key error.
+        sign_bonus_point = int(sign_resp['user_info']['sign_bonus_point'])
+    except KeyError:
+        pass
+    if error_code == '0':
+        print "签到成功,经验+%d" % sign_bonus_point
     else:
-        print '签到失败'
-        print "Error:" + unicode(sign_resp['error_code']) + " " + unicode(sign_resp['error_msg'])
+        error_msg = sign_resp['error_msg']
+        if error_msg == u'亲，你之前已经签过了':
+            print '之前已签到'
+        else:
+            print '签到失败'
+            print "Error:" + unicode(error_code) + " " + unicode(error_msg)
 
 
 def _sign_tieba(tieba, BDUSS):
