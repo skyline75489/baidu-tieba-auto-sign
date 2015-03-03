@@ -5,6 +5,7 @@ import cookielib
 import re
 import hashlib
 import json
+import threading
 
 
 def _setup_cookie(my_cookie):
@@ -128,7 +129,8 @@ def sign(my_cookie, BDUSS):
         print "获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
         return
     for tieba in _like_tieba_list:
-        _sign_tieba(tieba, BDUSS)
+        t = threading.Thread(target=_sign_tieba, args=(tieba, BDUSS))
+        t.start()
 
 
 def main():
