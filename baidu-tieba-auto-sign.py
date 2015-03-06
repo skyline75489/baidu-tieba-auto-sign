@@ -128,9 +128,14 @@ def sign(my_cookie, BDUSS):
     if len(_like_tieba_list) == 0:
         print "获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
         return
+    thread_list = []
     for tieba in _like_tieba_list:
         t = threading.Thread(target=_sign_tieba, args=(tieba, BDUSS))
+        thread_list.append(t)
         t.start()
+        
+    for t in thread_list:
+        t.join(10)
 
 
 def main():
