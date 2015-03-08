@@ -135,7 +135,7 @@ def sign(my_cookie, BDUSS):
         t.start()
         
     for t in thread_list:
-        t.join(10)
+        t.join(2)
 
 
 def main():
