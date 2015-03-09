@@ -118,7 +118,7 @@ def _sign_tieba(tieba, BDUSS):
         return
 
     sign_request = _make_sign_request(tieba, fid, tbs, BDUSS)
-    sign_resp = urllib2.urlopen(sign_request)
+    sign_resp = urllib2.urlopen(sign_request, timeout=5)
     _handle_response(sign_resp)
 
 
