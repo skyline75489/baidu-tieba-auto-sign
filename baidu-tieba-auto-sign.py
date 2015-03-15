@@ -6,6 +6,8 @@ import re
 import hashlib
 import json
 import threading
+import platform
+import os
 
 
 def _setup_cookie(my_cookie):
@@ -17,7 +19,7 @@ def _setup_cookie(my_cookie):
 
 
 def _fetch_like_tieba_list():
-    print u'获取喜欢的贴吧ing...'
+    print u'获取喜欢的贴吧ing...' if system_env else '获取喜欢的贴吧ing...'
     page_count = 1
     find_like_tieba = []
     while True:
@@ -94,27 +96,27 @@ def _handle_response(sign_resp):
     except KeyError:
         pass
     if error_code == '0':
-        print u"签到成功,经验+%d" % sign_bonus_point
+        print u"签到成功,经验+%d" % sign_bonus_point if system_env else "签到成功,经验+%d" % sign_bonus_point
     else:
         error_msg = sign_resp['error_msg']
         if error_msg == u'亲，你之前已经签过了':
-            print u'之前已签到'
+            print u'之前已签到' if system_env else '之前已签到'
         else:
-            print u'签到失败'
+            print u'签到失败' if system_env else '签到失败'
             print "Error:" + unicode(error_code) + " " + unicode(error_msg)
 
 
 def _sign_tieba(tieba, BDUSS):
     already_sign, fid, tbs = _fetch_tieba_info(tieba)
     if not already_sign:
-        print tieba.decode('utf-8') + u'......正在尝试签到'
+        print tieba.decode('utf-8') + u'......正在尝试签到' if system_env else tieba + '......正在尝试签到'
     else:
         if already_sign[0] == "已签到":
-            print tieba.decode('utf-8') + u"......之前已签到"
+            print tieba.decode('utf-8') + u"......之前已签到" if system_env else tieba + "......之前已签到"
             return
 
     if not fid or not tbs:
-        print u"签到失败，原因未知"
+        print u"签到失败，原因未知" if system_env else "签到失败，原因未知"
         return
 
     sign_request = _make_sign_request(tieba, fid, tbs, BDUSS)
@@ -126,7 +128,7 @@ def sign(my_cookie, BDUSS):
     _setup_cookie(my_cookie)
     _like_tieba_list = _fetch_like_tieba_list()
     if len(_like_tieba_list) == 0:
-        print u"获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
+        print u"获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确" if system_env else "获取喜欢的贴吧失败，请检查Cookie和BDUSS是否正确"
         return
     thread_list = []
     for tieba in _like_tieba_list:
@@ -144,4 +146,6 @@ def main():
     sign(my_cookie, BDUSS)
 
 if __name__ == "__main__":
+    system_env = True if platform.system()=='Windows' else False
     main()
+    os.system("date /T >> tieba_log.log") if system_env else os.system("date >> tieba_log.log")
