@@ -18,7 +18,8 @@
 * 通过浏览器抓包获取Cookie和BDUSS，获取BDUSS需要切换到 http://tieba.baidu.com/mo/ 注销并重新登陆
 * 把脚本中的Cookie和BDUSS换成自己的值，然后执行脚本
 
-如果是在搬瓦工之类的小内存VPS上运行，请使用 **baidu-tieba-auto-sign_low_memory.py**
+Cookie结构：BAIDU_WISE_UID= ***; BAIDUID= ***; Hm_lvt_*** ; Hm_lpvt_**; HOSUPPORT=*; HISTORY=***; BDUSS=***; PTOKEN=***; STOKEN=***; SAVEUSERID=***; USERNAMETYPE=*; UBI=****（这是我获取并验证可用的，可能有多余的）
+如果是在搬瓦工（Bandwagonhost）之类的小内存VPS上运行，请使用 **baidu-tieba-auto-sign_low_memory.py**
 
 
 ##已知问题
