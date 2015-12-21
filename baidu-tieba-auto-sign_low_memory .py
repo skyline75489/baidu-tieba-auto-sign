@@ -28,7 +28,7 @@ def _fetch_like_tieba_list():
         req = urllib2.Request(like_tieba_url)
         resp = urllib2.urlopen(req).read()
         resp = resp.decode('gbk').encode('utf8')
-        re_like_tieba = '<a href="\/f\?kw=.*?" title="(.*?)">.+?<\/a><\/td><td><a class="cur_exp" target="_blank".*?'
+        re_like_tieba = '<a href="\/f\?kw=.*?" title="(.*?)">.+?<\/a>'
         temp_like_tieba = re.findall(re_like_tieba, resp)
         if not temp_like_tieba:
             break
